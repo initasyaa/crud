@@ -15,17 +15,19 @@ return new class extends Migration
 
         Schema::create('product_boikots', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->bigInteger('code');
             $table->string('product_name');
-            $table->foreignId('type_id')->constrained();
-            $table->unsignedBigInteger('alternative_id')->nullable();
-            //$table->foreignId('alternative_id')->nullable()->constrained('alternative_products')->nullOnDelete();
             $table->string('brand_name');
             $table->string('status');
-            $table->string('description');
+            $table->foreignId('type_id')->constrained();
+            $table->text('description');
+            $table->unsignedBigInteger('alternative_id')->nullable();
+            $table->string('image')->nullable();
+            $table->string('halal_certificate_number')->nullable();
+            $table->string('bpom_certificate_number')->nullable();
             $table->timestamps();
 
-           // $table->foreign('alternative_id')->references('id')->on('alternative_products')->onDelete('set null');
+            $table->foreign('alternative_id')->references('id')->on('alternative_products')->onDelete('set null');
         });        
         
         Schema::enableForeignKeyConstraints();

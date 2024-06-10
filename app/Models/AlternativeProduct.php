@@ -13,15 +13,19 @@ class AlternativeProduct extends Model
         'code',
         'product_name',
         'brand_name',
+        'type_id',
         'description',
-        'type_id'
+        'image',
+        'halal_certificate_number',
+        'bpom_certificate_number',
     ];
+
     public function type()
     {
         return $this->belongsTo(Type::class);
     }
 
-    public function productBoikot()
+    public function products()
     {
         // return $this->belongsTo(ProductBoikot::class);
         //return $this->belongsTo(ProductBoikot::class, 'alternative_id')->whereNotNull('alternative_id');

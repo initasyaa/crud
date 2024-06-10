@@ -29,6 +29,8 @@
                     <div class="col-sm-4 invoice-col">
                         <b>Code:</b> {{ $data->code }}<br>
                         <b>Brand Name:</b> {{ $data->brand_name }}<br>
+                        <b>Sertifikat Halal :</b> {{ $data->halal_certificate_number }}<br>
+                        <b>BPOM:</b> {{ $data->bpom_certificate_number }}<br>
                     </div>
                     <!-- /.col -->
                     <div class="col-sm-4 invoice-col">

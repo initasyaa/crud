@@ -24,7 +24,9 @@ class ProductBoikotController extends Controller
      */
     public function create()
     {
-        return view('Admin.Product.create');
+        $types = Type::all();
+
+        return view('Admin.Product.create', compact('types'));
     }
 
     /**
@@ -33,13 +35,15 @@ class ProductBoikotController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'alternative_id' => 'nullable|integer',
+            'alternative_id' => 'nullable|exists:alternative_products,id',
             'code' => 'required|integer',
-            'product_name' => 'required|string',
-            'brand_name' => 'required|string',
-            'status' => 'required|string',
-            'description' => 'required|string',
-            'type_id' => 'required',
+            'product_name' => 'required',
+            'brand_name' => 'required',
+            'status' => 'required',
+            'description' => 'required',
+            'type_id' => 'required|exists:types,id',
+            'halal_certificate_number' => 'nullable|string',
+            'bpom_certificate_number' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -52,10 +56,12 @@ class ProductBoikotController extends Controller
         $data['status'] = $request->status;
         $data['description'] = $request->description;
         $data['type_id'] = $request->type_id;
+        $data['halal_certificate_number'] = $request->halal;
+        $data['bpom_certificate_number'] = $request->bpom;
 
         ProductBoikot::create($data);
 
-        return redirect()->route('list');
+        return redirect()->route('product.list');
     }
 
     /**
@@ -74,8 +80,9 @@ class ProductBoikotController extends Controller
     public function edit(Request $request, $id)
     {
         $data = ProductBoikot::find($id);
+        $types = Type::all();
 
-        return view('Admin.Product.edit', compact('data'));
+        return view('Admin.Product.edit', compact('data', 'types'));
     }
 
 
@@ -85,13 +92,15 @@ class ProductBoikotController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'alternative_id' => 'nullable|integer',
+            'alternative_id' => 'nullable|exists:alternative_products,id',
             'code' => 'required|integer',
-            'product_name' => 'required|string',
-            'brand_name' => 'required|string',
-            'status' => 'required|string',
-            'description' => 'required|string',
-            'type_id' => 'required|integer',
+            'product_name' => 'required',
+            'brand_name' => 'required',
+            'status' => 'required',
+            'description' => 'required',
+            'type_id' => 'required|exists:types,id',
+            'halal_certificate_number' => 'nullable|string',
+            'bpom_certificate_number' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -106,12 +115,14 @@ class ProductBoikotController extends Controller
             'status' => $request->status,
             'description' => $request->description,
             'type_id' => $request->type_id,
+            'halal_certificate_number' => $request->halal,
+            'bpom_certificate_number' => $request->bpom,
         ];
     
         $product = ProductBoikot::find($id);
         $product->update($data);
 
-        return redirect()->route('product/list');
+        return redirect()->route('product.list');
     }
 
     /**
@@ -125,6 +136,6 @@ class ProductBoikotController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('product/list');
+        return redirect()->route('product.list');
     }
 }

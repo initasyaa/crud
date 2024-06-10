@@ -16,7 +16,10 @@ class ProductBoikot extends Model
         'brand_name',
         'status',
         'description',
-        'type_id'
+        'type_id',
+        'image',
+        'halal_certificate_number',
+        'bpom_certificate_number',
     ];
 
     public function type()

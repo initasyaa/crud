@@ -10,13 +10,7 @@ class Type extends Model
     use HasFactory;
 
     protected $fillable = [
-        'alternative_id',
-        'code',
-        'product_name',
-        'brand_name',
-        'status',
-        'description',
-        'type_id'
+        'name',
     ];
 
     public function AlternativeProduct()

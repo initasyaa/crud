@@ -13,40 +13,25 @@ class AlternativeProductsTableSeeder extends Seeder
     public function run(): void
     {
         $alternativeProduct = [
-             [
-                'code' => 8888166989399,
-                'product_name' => 'Frisian Flag UHT Coklat 250ML',
-                'type_id' => 2, 
-                'brand_name' => 'Frisian Flag',
-                'description' => 'Dilansir dari situs bdnaash, nama Frisian Flag atau FrieslandCampina tidak tercantum dalam daftar perusahaan yang mendukung penjajahan Israel atas Palestina.'
+            [
+                'code' => 8888166988399,
+                'product_name' => 'Kg ast bisc red 300g',
+                'brand_name' => 'Khong Guan',
+                'type_id' => 1,
+                'description' => 'product aman untuk saat ini, karena tidak ada di daftar boikot',
+                'image' => 'images/kg_ast_bisc_red_300g.png',
+                'halal_certificate_number' => 'HALAL123456789',
+                'bpom_certificate_number' => 'BPOM123456789',
             ],
             [
-                'code' => 89686598131,
-                'product_name' => 'Chitato Sapi Panggang',
+                'code' => 9999999999999,
+                'product_name' => 'Healthy Snack',
+                'brand_name' => 'Healthy Brand',
                 'type_id' => 1,
-                'brand_name' => 'Indofood CBP Sukses Makmur',
-                'description' => 'Dilansir dari situs bdnaash, nama Frisian Flag atau FrieslandCampina tidak tercantum dalam daftar perusahaan yang mendukung penjajahan Israel atas Palestina.'
-            ],            
-            [
-                'code' => 89686060003,
-                'product_name' => 'Pop Mie Rasa Ayam Bawang',
-                'type_id' => 1,
-                'brand_name' => 'Indofood CBP Sukses Makmur',
-                'description' => 'Dilansir dari situs Nusahits, ICBP tidak memiliki hubungan bisnis dengan perusahaan Israel mana pun.'
-            ],
-            [
-                'code' => 8993007000253,
-                'product_name' => 'Indomilk Kids 115ML',
-                'type_id' => 1,
-                'brand_name' => 'Indolakto',
-                'description' => 'Dilansir dari situs Pitutur, menurut hasil penelusurannya Indofood tidak memiliki hubungan langsung dengan Israel.'
-            ],
-            [
-                'code' => 8993137715812,
-                'product_name' => 'Colorfit Perfect Glow Cushion',
-                'type_id' => 3,
-                'brand_name' => 'Wardah',
-                'description' => 'Dilansir dari situs Republika, brand Wardah secara tegas menyatakan dukungan dan keberpihakannya terhadap Palestina salah satunya adalah memboikot semua bahan baku yang berafiliasi dengan Israel.'
+                'description' => 'Alternative snack product.',
+                'image' => 'images/healthy_snack.png',
+                'halal_certificate_number' => 'HALAL987654321',
+                'bpom_certificate_number' => 'BPOM987654321',
             ],
         ];
 

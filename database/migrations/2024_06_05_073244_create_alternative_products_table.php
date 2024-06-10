@@ -12,6 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::disableForeignKeyConstraints();
+        Schema::create('alternative_products', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('code');
+            $table->string('product_name');
+            $table->string('brand_name');
+            $table->foreignId('type_id')->constrained();
+            $table->text('description');
+            $table->string('image')->nullable();
+            $table->string('halal_certificate_number')->nullable();
+            $table->string('bpom_certificate_number')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::disableForeignKeyConstraints();
+
+
+        /* Schema::disableForeignKeyConstraints();
 
         Schema::create('alternative_products', function (Blueprint $table) {
             $table->id();
@@ -23,7 +40,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints(); */
     }
 
     public function down(): void

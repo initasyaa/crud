@@ -69,9 +69,15 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label>Status</label>
-                                            <input type="text" name="status" class="form-control"
-                                                placeholder="Enter status product">
+                                            <label>Status</label><br>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="status" id="safe" value="Produk Tidak Masuk di Daftar Boikot" {{ old('status') == 'Produk Tidak Masuk di Daftar Boikot' ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="safe">Aman</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="status" id="boycott" value="Produk Masuk di Daftar Boikot" {{ old('status') == 'Produk Masuk di Daftar Boikot' ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="boycott">Boikot</label>
+                                            </div>
                                             @error('status')
                                                 <small>{{ $message }}</small>
                                             @enderror
@@ -86,9 +92,29 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Product Type</label>
-                                            <input type="number" name="type_id" class="form-control"
-                                                placeholder="Enter product type">
+                                            <select name="type_id" class="form-control">
+                                                <option value="">Select Type</option>
+                                                @foreach($types as $type)
+                                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                                @endforeach
+                                            </select>
                                             @error('type_id')
+                                                <small>{{ $message }}</small>
+                                            @enderror 
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nomor Sertifikat Halal</label>
+                                            <input type="number" name="halal" class="form-control"
+                                                placeholder="Enter Nomor Sertifikat Halal">
+                                            @error('halal')
+                                                <small>{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nomor Sertifikat BPOM</label>
+                                            <input type="number" name="bpom" class="form-control"
+                                                placeholder="Enter Nomor Sertifikat BPOM">
+                                            @error('bpom')
                                                 <small>{{ $message }}</small>
                                             @enderror
                                         </div>
