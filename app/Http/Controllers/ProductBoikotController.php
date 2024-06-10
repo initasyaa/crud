@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AlternativeProduct;
 use Illuminate\Http\Request;
 use App\Models\ProductBoikot;
 use App\Models\Type;

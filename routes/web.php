@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlternativeProductController;
+use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductBoikotController;
@@ -54,5 +55,11 @@ Route::prefix('type')->name('type.')->controller(TypeController::class)->group(f
 
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::put('/update/{id}', 'update')->name('update');
+    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+});
+
+Route::prefix('feedback')->name('feedback.')->controller(FeedbackController::class)->group(function () {
+    Route::get('/list', 'index')->name('list');
+    Route::put('/accept/{id}', 'accept')->name('accept');
     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
 });

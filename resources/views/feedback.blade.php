@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Product Type</h1>
+                        <h1 class="m-0">Feedback List</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Data Product Type</li>
+                            <li class="breadcrumb-item active">Data Feedback</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -25,23 +25,22 @@
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{ route('type.create') }}" class="btn btn-primary mb-3">Add Type</a>
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Listed Type</h3>
+                                <h3 class="card-title">Listed Products</h3>
 
-                                <div class="card-tools">
+                                <form action="{{ route('feedback.list') }}" method="GET" class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
+                                        <input type="text" name="search" class="form-control float-right"
                                             placeholder="Search">
-
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
                                             </button>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
@@ -49,7 +48,12 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Product Type</th>
+                                            <th>Code</th>
+                                            <th>Product Name</th>
+                                            <th>Brand Name</th>
+                                            <th>Status</th>
+                                            <th>Date</th>
+                                            <th>Review</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -57,15 +61,59 @@
                                         @foreach ($data as $d)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $d->name }}</td>
+                                                <td>{{ $d->code }}</td>
+                                                <td>{{ $d->product_name }}</td>
+                                                <td>{{ $d->brand_name }}</td>
+                                                <td>{{ $d->status }}</td>
+                                                <td>{{ $d->created_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('type.edit', ['id' => $d->id]) }}"
-                                                        class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                                    @if ($d->reviewed)
+                                                    <button class="btn btn-success"><i class="fas fa-check-circle"></i>
+                                                        Reviewed</button>
+                                                @else
+                                                    <button class="btn btn-default" data-toggle="modal"
+                                                        data-target="#modal-action{{ $d->id }}">
+                                                        <i class="fas fa-circle"></i> Review
+                                                    </button>
+                                                @endif
+                                                </td>
+                                                <td>                                                    
                                                     <a data-toggle="modal" data-target="#modal-delete{{ $d->id }}"
                                                         href="" class="btn btn-danger"><i
                                                             class="fas fa-trash-alt"></i></a>
-
+                                                </td>
                                             </tr>
+                                            <div class="modal fade" id="modal-action{{ $d->id }}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Konfirmasi Feedback Data</h4>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Apakah kamu yakin data <b>{{ $d->product_name }}</b> telah
+                                                                ditinjau?</p>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <form action="{{ route('feedback.accept', ['id' => $d->id]) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button type="button" class="btn btn-default"
+                                                                    data-dismiss="modal">Belum</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Sudah</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                            </div>
+
                                             <div class="modal fade" id="modal-delete{{ $d->id }}">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -77,12 +125,14 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Apakah kamu yakin ingin hapus menghapus produk bertype
-                                                                <b>{{ $d->name }}</b>?
+                                                            <p>Apakah kamu yakin ingin hapus menghapus data feedback pada
+                                                                produk
+                                                                <b>{{ $d->product_name }}</b>?
                                                             </p>
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
-                                                            <form action="{{ route('type.destroy', ['id' => $d->id]) }}"
+                                                            <form
+                                                                action="{{ route('feedback.destroy', ['id' => $d->id]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -100,6 +150,7 @@
                                             <!-- /.modal -->
                                         @endforeach
                                     </tbody>
+
                                 </table>
                             </div>
                             <!-- /.card-body -->

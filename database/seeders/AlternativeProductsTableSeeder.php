@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\AlternativeProduct;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\Mime\Part\Multipart\AlternativePart;
 
 class AlternativeProductsTableSeeder extends Seeder
 {

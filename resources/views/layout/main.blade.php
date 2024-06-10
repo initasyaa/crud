@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('template/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet"
         href="{{ asset('template/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
@@ -121,7 +122,7 @@
                         
                       </li>
                       <li class="nav-item">
-                          <a href="" class="nav-link {{ request()->is('') ? 'active' : '' }}">
+                          <a href="/feedback/list" class="nav-link {{ request()->is('feedback/list') ? 'active' : '' }}">
                               <i class="nav-icon fas fa-project-diagram"></i>
                               <p>
                                   Feedback

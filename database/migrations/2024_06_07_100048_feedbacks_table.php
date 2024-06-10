@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
-            $table->integer('code');
+            $table->string('code');
             $table->string('product_name');
+            $table->string('brand_name');
             $table->text('description');
             $table->string('status');
-            $table->dateTime('date');
+            $table->boolean('reviewed')->default(false);
             $table->timestamps();
         });
     }

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Type;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class TypesTableSeeder extends Seeder
 {
@@ -16,7 +15,8 @@ class TypesTableSeeder extends Seeder
         $types = [
             ['name' => 'Makanan'],
             ['name' => 'Minuman'],
-            ['name' => 'Kosmetik'],
+            ['name' => 'Cosmetics'],
+            ['name' => 'Skincare'],
         ];
 
         foreach ($types as $type) {
